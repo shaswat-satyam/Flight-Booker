@@ -1,0 +1,20 @@
+<h1> New Booking Here for </h1>
+<h2> Id of the Flight: <%=@Flight.id%></h2>
+<h2> Departure <%=@Flight.departure_airport.code%></h2>
+<h2> Arrival <%=@Flight.arrival_airport.code%></h2>
+<h2> Departure Time <%=@Flight.departure_time%></h2>
+<h2> Arrival Time <%=@Flight.arrival_time%></h2>
+<h2> Count: <%=@count%></h2>
+
+<%= form_with url: new_passenger_path, method: :get do |f|%>
+<%= hidden_field_tag "count", @count%>
+<%= hidden_field_tag "flight", @Flight.id%>
+    <%@count.to_i.times do |i| %>
+        <%="Passenger "+(i+1).to_s%>
+        <%= f.text_field :name, input_html:{multiple:true}, :placeholder => "Name" %>
+        <%= f.text_field :email,input_html:{multiple:true}, :placeholder => "Email" %>
+        <br><br>
+    <%end%>
+    <%=f.submit "Submit the Details"%>
+<%end%>
+

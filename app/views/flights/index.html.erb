@@ -1,0 +1,37 @@
+<h1> Odin Flight Booking System!</h1>
+<%= link_to "Reset", root_path%>
+<div>
+    <h2>Search Flights</h2>
+
+    <%= form_with url:"/flights",name:"search_plane", method: :get do |form| %>
+        <%= form.label :departure, "Departure Airport" %>
+        <%= form.collection_select :departure, @departure_airports, :id, :code,{:prompt => ! @departureIsSet}, { :onchange => "this.form.submit();"} %>
+
+        <%= form.label :arrival, "Arrival Airport" %>
+        <%= form.collection_select :arrival, @arrival_airports, :id, :code,{:prompt => ! @arrivalIsSet},{:onchange => "this.form.submit();"} %>
+
+        <%= form.label :passenger, "Number of Passengers" %>
+        <%= form.select :passenger, options_for_select((1..4).to_a),{}, {} %>
+
+        <%= form.label :date, "Date of travel" %>
+        <%= form.select :date, @flights.map{|flight| flight.departure_time}.uniq, {}, {onchange:"this.form.requestSubmit()"}  %>
+
+        <%= form.submit "Search"%>
+    <% end %>
+    
+
+    <h1>Searched Flights</h1>
+    <%= form_with url: new_booking_path, method: :get do |f| %>
+        <%= hidden_field_tag :count, @count%>
+        <% @searchedFlights.each do |flight| %>
+            <%= f.radio_button :flight, flight.id%>
+            <%= f.label :flight, "Flight #{flight.id} - #{flight.departure_airport.code} to #{flight.arrival_airport.code} on #{flight.departure_time} - #{flight.arrival_time}" %>
+            <br><br>
+        <%end%>
+        <%if @searchedFlights.length > 0%>
+        <%= f.submit "Book Flight"%>
+        <%end%>
+    <%end%>
+
+    <%=console%>
+</div>
