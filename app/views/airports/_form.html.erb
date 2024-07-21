@@ -1,4 +1,4 @@
-<%= form_with(model: airport) do |form| %>
+<%= form_with(model: airport, class:"space-y-5 space-x-5") do |form| %>
   <% if airport.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(airport.errors.count, "error") %> prohibited this airport from being saved:</h2>
@@ -10,8 +10,14 @@
       </ul>
     </div>
   <% end %>
+  <%=form.label :code, "Airport Code"%>
+  <%=form.text_field :code, class:"rounded",placeholder:"AIR"%>
+  <%=form.label :name, "Airport Name"%>
+  <%=form.text_field :name,class:"rounded",placeholder:"Air International Airport"%>
+  <%=form.label :address, "Airport Address"%>
+  <%=form.text_field :address, class:"rounded",placeholder:"Earth"%>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit class: "rounded my-2 p-2 bg-green-500 hover:bg-green-700" %>
   </div>
 <% end %>

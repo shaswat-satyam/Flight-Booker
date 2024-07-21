@@ -1,37 +1,43 @@
-<h1> Odin Flight Booking System!</h1>
-<%= link_to "Reset", root_path%>
-<div>
-    <h2>Search Flights</h2>
+<div class="backdrop-blur-sm border-2 rounded  border-white self-center py-5 content-center px-10 w-11/12 mt-5 h-fit">
+<%= link_to "Odin Flight Booking", root_path, class:"rounded-lg w-full text-6xl font-sans text-blue-950 font-bold italic mx-10 hover:backdrop-blur-xl transition-all"%>
+</div>
+<div class="px-10 space-y-5 w-11/12 backdrop-blur-sm font-semibold bg-white/5 border-2 border-white rounded-md self-center p-5">
+    <h2 class="py-5 bold text-4xl font-Sans ">Search Flights</h2>
+    <%= link_to "Reset Form", root_path, class:"rounded-md text-white bg-red-500 opacity-75 p-2 hover:bg-red hover:opacity-100  transition"%>
 
-    <%= form_with url:"/flights",name:"search_plane", method: :get do |form| %>
+    <%= form_with url:"/flights",name:"search_plane", class:"", method: :get do |form| %>
         <%= form.label :departure, "Departure Airport" %>
-        <%= form.collection_select :departure, @departure_airports, :id, :code,{:prompt => ! @departureIsSet}, { :onchange => "this.form.submit();"} %>
+        <%= form.collection_select :departure, @departure_airports, :id, :code,{:prompt => ! @departureIsSet}, {:class=>"rounded mx-5",:onchange => "this.form.submit();"} %>
 
         <%= form.label :arrival, "Arrival Airport" %>
-        <%= form.collection_select :arrival, @arrival_airports, :id, :code,{:prompt => ! @arrivalIsSet},{:onchange => "this.form.submit();"} %>
+        <%= form.collection_select :arrival, @arrival_airports, :id, :code,{:prompt => ! @arrivalIsSet},{:class=>"rounded mx-5",:onchange => "this.form.submit();"} %>
 
         <%= form.label :passenger, "Number of Passengers" %>
-        <%= form.select :passenger, options_for_select((1..4).to_a),{}, {} %>
+        <%= form.select :passenger, options_for_select((1..4).to_a),{}, {:class=>"rounded mx-5",:onchange =>"this.form.submit()"} %>
 
         <%= form.label :date, "Date of travel" %>
-        <%= form.select :date, @flights.map{|flight| flight.departure_time}.uniq, {}, {onchange:"this.form.requestSubmit()"}  %>
-
-        <%= form.submit "Search"%>
+        <%= form.select :date, @flights.map{|flight| flight.departure_time}.uniq, {}, {:class=>"mx-5 rounded",onchange:"this.form.requestSubmit()"}  %>
+<br>
+        <%= form.submit "Search 🔎", class:"bg-blue-600 p-2 my-2 rounded hover:bg-blue-800"%>
     <% end %>
     
 
-    <h1>Searched Flights</h1>
+    <h1 class="font-semibold text-3xl">Searched Flights</h1>
     <%= form_with url: new_booking_path, method: :get do |f| %>
         <%= hidden_field_tag :count, @count%>
         <% @searchedFlights.each do |flight| %>
             <%= f.radio_button :flight, flight.id%>
-            <%= f.label :flight, "Flight #{flight.id} - #{flight.departure_airport.code} to #{flight.arrival_airport.code} on #{flight.departure_time} - #{flight.arrival_time}" %>
+            <%= f.label :flight, "Flight #{flight.id} - #{flight.departure_airport.code} to #{flight.arrival_airport.code} on #{flight.departure_time} - #{flight.arrival_time}", class:"mx-2" %>
             <br><br>
         <%end%>
         <%if @searchedFlights.length > 0%>
-        <%= f.submit "Book Flight"%>
+            <%= f.submit "Book Flight", class:"bg-green-500 px-2 py-2 rounded hover:bg-green-700"%>
         <%end%>
     <%end%>
 
-    <%=console%>
+</div>
+
+<div class="backdrop-blur-sm border-2 rounded  border-white self-center py-5 content-center px-10 w-11/12 mt-5 h-fit">
+ <%= link_to 'Create new Airport', new_airport_path, class:"p-2 rounded bg-lime-400 hover:bg-lime-700" %>
+ <%= link_to 'Create new Flight', new_flight_path,class:"p-2 rounded bg-lime-400 hover:bg-lime-700" %>
 </div>

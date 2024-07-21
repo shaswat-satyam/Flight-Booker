@@ -1,20 +1,37 @@
-<h1> New Booking Here for </h1>
-<h2> Id of the Flight: <%=@Flight.id%></h2>
-<h2> Departure <%=@Flight.departure_airport.code%></h2>
-<h2> Arrival <%=@Flight.arrival_airport.code%></h2>
-<h2> Departure Time <%=@Flight.departure_time%></h2>
-<h2> Arrival Time <%=@Flight.arrival_time%></h2>
-<h2> Count: <%=@count%></h2>
 
-<%= form_with url: new_passenger_path, method: :get do |f|%>
+<div class="backdrop-blur-sm border-2 rounded  border-white self-center py-5 content-center px-10 w-11/12 mt-5 h-fit">
+<%= link_to "Odin Flight Booking", root_path, class:"rounded-lg w-full text-6xl font-sans text-blue-950 font-bold italic mx-10 hover:backdrop-blur-xl transition-all"%>
+</div>
+<div class=" my-6 border-white border-2 space-y-3 px-5 py-4 self-center w-11/12 backdrop-blur-md">
+<h1 class="text-4xl py-4 font-bold font-mono"> New Booking</h1>
+<h1 class="text-2xl font-semibold">Details of the Flights</h1>
+<div class="">
+<div class="flex gap-5">
+<h2> Id: <%=@Flight.id%></h2>
+<h2 class="ml-8"> Departure: <%=@Flight.departure_airport.code%></h2>
+<div class="text-xl ml-10"> 🛫  ---></div>
+<h2> Arrival: <%=@Flight.arrival_airport.code%></h2>
+</div>
+<div class="flex gap-5">
+<h2> Count: <%=@count%></h2>
+<h2> Departure Time: <%=@Flight.departure_time%></h2>
+<h2 class="ml-10"> Arrival Time: <%=@Flight.arrival_time%></h2>
+</div>
+</div>
+</div>
+
+<%= form_with url: new_passenger_path,class:"backdrop-blur-md border-white border-2 space-y-2 px-5 py-4 w-11/12 self-center", method: :get do |f|%>
+<h1 class="text-2xl font-semibold pb-5">Enter the details of Passenger(s)</h1>
 <%= hidden_field_tag "count", @count%>
 <%= hidden_field_tag "flight", @Flight.id%>
     <%@count.to_i.times do |i| %>
-        <%="Passenger "+(i+1).to_s%>
-        <%= f.text_field :name, input_html:{multiple:true}, :placeholder => "Name" %>
-        <%= f.text_field :email,input_html:{multiple:true}, :placeholder => "Email" %>
+     <div class="flex gap-5 align-middle">
+        <div class="pl-5 w-fit"><%="Passenger "+(i+1).to_s%></div>
+        <%= f.text_field :name, input_html:{multiple:true},:class =>"rounded", :placeholder => "Name" %>
+        <%= f.text_field :email,input_html:{multiple:true},:class =>"rounded", :placeholder => "Email" %>
         <br><br>
+    </div>
     <%end%>
-    <%=f.submit "Submit the Details"%>
+    <%=f.submit "Submit",class:"bg-green-500 rounded hover:bg-green-700 p-2"%>
 <%end%>
 

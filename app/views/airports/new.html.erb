@@ -1,9 +1,15 @@
-<h1>New airport</h1>
+<div class="backdrop-blur-sm border-2 rounded  border-white self-center py-5 content-center px-10 w-11/12 mt-5 h-fit">
+<%= link_to "Odin Flight Booking", root_path, class:"rounded-lg w-full text-6xl font-sans text-blue-950 font-bold italic mx-10 hover:backdrop-blur-xl transition-all"%>
+</div>
+
+<div class="backdrop-blur-sm border-2 rounded border-white self-center py-5 content-center px-10 w-11/12 mt-5 h-fit">
+<h1 class="text-2xl font-semibold pb-5 ">New airport</h1>
 
 <%= render "form", airport: @airport %>
 
 <br>
 
 <div>
-  <%= link_to "Back to airports", airports_path %>
+    <%= link_to "Back to root", root_path, class:" bg-blue-500 p-2 rounded hover:bg-blue-700" %>
+</div>
 </div>
