@@ -25,7 +25,7 @@ class AirportsController < ApplicationController
 
     respond_to do |format|
       if @airport.save
-        format.html { redirect_to airport_url(@airport), notice: "Airport was successfully created." }
+        format.html { redirect_to root_path, notice: "Airport was successfully created." }
         format.json { render :show, status: :created, location: @airport }
       else
         format.html { render :new, status: :unprocessable_entity }

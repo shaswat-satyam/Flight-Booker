@@ -13,7 +13,7 @@ class FlightsController < ApplicationController
             @arrival_airports = Airport.where(id: params[:arrival])
             @arrivalIsSet = true
         end
-        @dates=Flight.where(departure_airport_id: params[:departure]).where(arrival_airport_id: params[:arrival]).uniq || []
+        @dates=Flight.where(departure_airport_id: params[:departure]).where(arrival_airport_id: params[:arrival]).pluck(:departure_time).uniq || []
         @searchedFlights = Flight.where(departure_airport_id: params[:departure]).where(arrival_airport_id: params[:arrival])
         @count = params[:passenger]
     end

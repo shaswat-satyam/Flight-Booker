@@ -16,9 +16,9 @@
         <%= form.select :passenger, options_for_select((1..4).to_a),{}, {:class=>"rounded mx-5",:onchange =>"this.form.submit()"} %>
 
         <%= form.label :date, "Date of travel" %>
-        <%= form.select :date, @flights.map{|flight| flight.departure_time}.uniq, {}, {:class=>"mx-5 rounded",onchange:"this.form.requestSubmit()"}  %>
+        <%= form.select :date, @dates, {}, {:class=>"mx-5 rounded",onchange:"this.form.requestSubmit()"}  %>
 <br>
-        <%= form.submit "Search 🔎", class:"bg-blue-600 p-2 my-2 rounded hover:bg-blue-800"%>
+        <%= form.submit "Search 🔎", class:"bg-blue-600 text-white p-2 my-2 rounded hover:bg-blue-800"%>
     <% end %>
     
 
@@ -31,13 +31,14 @@
             <br><br>
         <%end%>
         <%if @searchedFlights.length > 0%>
-            <%= f.submit "Book Flight", class:"bg-green-500 px-2 py-2 rounded hover:bg-green-700"%>
+            <%= f.submit "Book Flight", class:"bg-green-500 text-white px-2 py-2 rounded hover:bg-green-700"%>
         <%end%>
     <%end%>
 
 </div>
 
 <div class="backdrop-blur-sm border-2 rounded  border-white self-center py-5 content-center px-10 w-11/12 mt-5 h-fit">
- <%= link_to 'Create new Airport', new_airport_path, class:"p-2 rounded bg-lime-400 hover:bg-lime-700" %>
+<h1 class="text-4xl font-semibold pb-5">Admin Panel</h1>
+ <%= link_to 'Create new Airport', new_airport_path, class:"p-2 mr-5 rounded bg-lime-400 hover:bg-lime-700" %>
  <%= link_to 'Create new Flight', new_flight_path,class:"p-2 rounded bg-lime-400 hover:bg-lime-700" %>
 </div>
